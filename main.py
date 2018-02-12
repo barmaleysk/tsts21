@@ -1,9 +1,9 @@
 # coding: utf8
 import telebot
 import func
-import DataBase
+import connector
 from multiprocessing import Process
-from texts import *
+from message_templates import *
 import re
 import imgur
 
@@ -134,9 +134,7 @@ def reset_option(message):
 def validate_commands(commands):
     result = commands_validate_pattern.findall(commands)
     if result:
-        if len(result) > 1:
-            return (True, result)
-        return (False, result)
+        return len(result) > 1, result
 
 
 def add_more_commands(commands, message):
@@ -771,5 +769,5 @@ def main():
 
 
 if __name__ == '__main__':
-    DB = DataBase.DataBaseConnect()
+    DB = connector.DataBaseConnect()
     main()
