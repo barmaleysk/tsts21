@@ -1,6 +1,6 @@
 # coding: utf8
 import telebot
-import DataBase
+import connector
 from time import sleep
 import sys
 from alert_system import alert
@@ -13,7 +13,7 @@ def main(token, user_id):
 
     @bot.message_handler(commands=['ban'])
     def ban_user(message):
-        db = DataBase.DataBaseConnect()
+        db = connector.DataBaseConnect()
         if message.reply_to_message is not None:
             if message.reply_to_message.forward_from.id != user_id:
                 db.ban_user(user_id=user_id, bot_name=_bot, banned_user=str(message.reply_to_message.forward_from.id))
@@ -27,7 +27,7 @@ def main(token, user_id):
     def run(message):
         global flag
         flag = True
-        db = DataBase.DataBaseConnect()
+        db = connector.DataBaseConnect()
         if int(message.chat.id) != int(user_id) and str(message.chat.id) not in db.get_banned_users(user_id=user_id,
                                                                                                     bot_name=_bot):
             bot.forward_message(user_id, message_id=message.message_id, from_chat_id=message.chat.id)
@@ -45,7 +45,7 @@ def main(token, user_id):
     def driver(message):
         nonlocal client_id
         global flag
-        db = DataBase.DataBaseConnect()
+        db = connector.DataBaseConnect()
         if str(message.chat.id) not in db.get_banned_users(user_id=user_id, bot_name=_bot):
             if int(message.from_user.id) != int(user_id):
                 bot.forward_message(user_id, message_id=message.message_id, from_chat_id=message.chat.id)
