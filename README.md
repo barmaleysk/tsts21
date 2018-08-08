@@ -1,4 +1,4 @@
-# Deploy on Heroku.
+# Deploy on Heroku. (total shit)
 
 ```
 > cd myapp
