@@ -9,7 +9,7 @@ import imgur
 
 commands_validate_pattern = re.compile(r'/[A-Za-z_]+')
 processes = {}
-token = ''
+token = '655728040:AAFnhcwYKbkBUoWhDJLxaaR3aG4-NY9bQWE'
 bot = telebot.TeleBot(token)
 client_status = {}
 
